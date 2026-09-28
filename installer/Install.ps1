@@ -1,22 +1,16 @@
-function Get-GitDownload {
-    param(
-        [Parameter(Mandatory)]
-        [ValidateSet('FR3-d1', 'Ghostwires')]
-        [string] $Repo,
+function Install-BaseApp {
+    $AppDataPath = [Environment]::GetFolderPath('LocalApplicationData')
 
-        [string] $Path
-    )
-
-    switch ($Repo) {
-        'FR3-d1' { $RepoName = 'Lunas-Lab/FR3-d1'  }
-        'Ghostwires' { $RepoName = 'ghostwires/transcripts' }
-    }
-
-    Invoke-WebRequest -Uri "https://github.com/$RepoName/archive/refs/heads/main.zip" `
+    Invoke-WebRequest -Uri "https://github.com/Lunas-Lab/FR3-d1/archive/refs/heads/master.zip" `
                         -OutFile "$PSScriptRoot\Download.zip" `
                         -UseBasicParsing
 
-    Expand-Archive -Path "$PSScriptRoot\Download.zip" -DestinationPath $Path
+    Expand-Archive -Path "$PSScriptRoot\Download.zip" `
+                    -DestinationPath $AppDataPath
+
+    Rename-Item -Path "$AppDataPath\FR3-d1-master" -NewName "FR3-d1"
+
+    Remove-Item -Path "$PSScriptRoot\Download.zip"
 
 }
 
@@ -28,10 +22,6 @@ function Get-Transcripts {
 
     Invoke-WebRequest -Uri "https://downgit.github.io/#/home?url=https://github.com/ghostwires/transcripts/tree/main/_posts" `
                         -OutFile "$PSScriptRoot\Staging\Transcripts.zip"
-}
-
-function Get-InstallFiles {
-    
 }
 
 
@@ -53,4 +43,4 @@ if ($InstallPath.Trim() -eq "") {
 }
 } while(!$ValidInstallPath)
 
-Get-GitDownload -Path $InstallPath -Repo Ghostwires
+Install-BaseApp
