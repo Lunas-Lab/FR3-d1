@@ -116,3 +116,30 @@ function Get-TapeContent {
 
     $Return
 }
+
+function Install-Updates {
+    $AppDataPath = [Environment]::GetFolderPath('LocalApplicationData')
+
+    Import-Module ".\lib\version.psm1" -Force
+
+    $Headers = @{
+        "Cache-Control" = "no-cache, no-store, must-revalidate"
+        "Pragma"        = "no-cache"
+        "Expires"       = "0"
+    }
+    $Response = Invoke-WebRequest -Uri "https://github.com/Lunas-Lab/FR3-d1/lib/Version.psm1" -UseBasicParsing -Headers $Headers
+    $RemoteVersion = $Response.Content.Split('"')[1]
+    if ([version] $RemoteVersion -gt $Version) {
+        Write-Host "There is an update for FR3-d1 available." -BackgroundColor DarkYellow -ForegroundColor White
+        if (Get-UserInput -Prompt "Would you like to update now?" `
+                -ErrorMessage "Please only enter `"y`" for `"yes`" or `"n`" for `"no`"" `
+                -CheckMethod { $args[0] -iin "y", "n" } `
+                -Type YesNo) {
+            Write-Host "Installing version " -NoNewline
+            Write-Host "$RemoteVersion" -ForegroundColor DarkMagenta -NoNewline
+            Write-Host "..."
+            & "$AppDataPath\FR3-d1_updater\updater.ps1" -HostProcessID $PID
+            Exit
+        }
+    }
+}

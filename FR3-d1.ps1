@@ -4,6 +4,7 @@ Import-Module ".\lib\Get-UserInput.psm1" -Force
 Import-Module ".\lib\funcs.psm1" -Force
 
 if (Test-Connection -ComputerName 8.8.8.8 -Count 2 -Quiet) {
+    Install-Updates
     Get-NewEpisodes
 }
 
