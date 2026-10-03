@@ -127,7 +127,7 @@ function Install-Updates {
         "Pragma"        = "no-cache"
         "Expires"       = "0"
     }
-    $Response = Invoke-WebRequest -Uri "https://github.com/Lunas-Lab/FR3-d1/blob/master/lib/version.psm1" -UseBasicParsing -Headers $Headers
+    $Response = Invoke-WebRequest -Uri "https://github.com/Lunas-Lab/FR3-d1/raw/master/lib/version.psm1" -UseBasicParsing -Headers $Headers
     $RemoteVersion = $Response.Content.Split('"')[1]
     if ([version] $RemoteVersion -gt $Version) {
         Write-Host "There is an update for FR3-d1 available." -BackgroundColor DarkYellow -ForegroundColor White
