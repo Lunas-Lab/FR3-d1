@@ -1,5 +1,13 @@
-function Update-BaseAppFiles {
-    $AppDataPath = [Environment]::GetFolderPath('LocalApplicationData')
+param (
+    [Parameter(Mandatory)]
+    [int] $HostProcessID
+)
+
+do {
+
+} while ($null -ne (Get-Process | Where-Object -Property ID -eq $HostProcessID))
+
+$AppDataPath = [Environment]::GetFolderPath('LocalApplicationData')
 
     Invoke-WebRequest -Uri "https://github.com/Lunas-Lab/FR3-d1/archive/refs/heads/master.zip" `
         -OutFile "$PSScriptRoot\base_app.zip" `
@@ -13,7 +21,3 @@ function Update-BaseAppFiles {
     Rename-Item -Path "$AppDataPath\FR3-d1-master" -NewName "FR3-d1" -Force
 
     Remove-Item -Path "$PSScriptRoot\base_app.zip"
-
-}
-
-Update-BaseAppFiles
