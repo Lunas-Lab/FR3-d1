@@ -96,6 +96,6 @@ $Open = Read-Host "Would you like to open FR3-d1? (y/n)"
 } while ($Open -notin 'y', 'n')
 
 switch ($Open) {
-    'y' { Invoke-Item "$AppDataPath\FR3-d1\FR3-d1.ps1" }
+    'y' { Start-Process -FilePath "powershell.exe" -ArgumentList "-File `"$AppDataPath\FR3-d1\FR3-d1.ps1`""; exit }
     'n' {exit}
 }
