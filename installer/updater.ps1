@@ -19,8 +19,8 @@ Expand-Archive -Path "$PSScriptRoot\base_app.zip" `
 Remove-Item -Path "$AppdataPath\FR3-d1" -Recurse -Force
 Rename-Item -Path "$AppDataPath\FR3-d1-master" -NewName "FR3-d1" -Force
 Remove-Item -Path "$PSScriptRoot\base_app.zip"
-Move-Item -Path "$AppDataPath\FR3-d1\" `
-    -Destination "$AppDataPath\FR3-d1_updater\transcripts"
+Move-Item -Path "$AppDataPath\FR3-d1_updater\transcripts" `
+    -Destination "$AppDataPath\FR3-d1\"
 
 Start-Process -FilePath "powershell.exe" -ArgumentList "-File `"$AppDataPath\FR3-d1\FR3-d1.ps1`""
 
