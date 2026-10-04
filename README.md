@@ -18,5 +18,5 @@ A few days' free time, many cups of tea and **no AI**. If you need AI to code yo
 
 [ghostwires](https://github.com/ghostwires) for the transcripts in Markdown format, pulled from their [transcripts repo](https://github.com/ghostwires/transcripts)
 [Rusty Quill Network](https://rustyquill.com/) for making [The Magnus Protocol](https://rustyquill.com/show/the-magnus-protocol/)
-[RivoLink](https://github.com/RivoLink) for [leaf](https://github.com/rivolink/leaf), the markdown viewer that this uses
+[RivoLink](https://github.com/RivoLink) for [leaf](https://github.com/rivolink/leaf), the markdown viewer that this uses  
 My beautiful girlfriend August and our friend Squeek for the encouragement to make this during their D&D sessions
