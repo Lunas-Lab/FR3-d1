@@ -138,7 +138,8 @@ function Install-Updates {
             Write-Host "Installing version " -NoNewline
             Write-Host "$RemoteVersion" -ForegroundColor DarkMagenta -NoNewline
             Write-Host "..."
-            & "$AppDataPath\FR3-d1_updater\updater.ps1" -HostProcessID $PID
+            Set-Location "C:\"
+            Start-Process -FilePath "powershell.exe" -ArgumentList "-File `"$AppDataPath\FR3-d1_updater\updater.ps1`"", "-HostProcessID $PID"
             Exit
         }
     }

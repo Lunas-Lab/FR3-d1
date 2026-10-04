@@ -38,7 +38,7 @@ function Get-Transcripts {
     ForEach-Object {
         if (($_.Name -notmatch "\d{4}-\d{2}-\d{2}-\d{3}\.md") `
                 -or (($_ | Get-Content -Raw) -notmatch "categories:.*tmagp.*")) {
-            Remove-Item $_ -Force
+            Remove-Item "$AppDataPath\FR3-d1\transcripts\$($_.Name)" -Force
         }
     }
     
