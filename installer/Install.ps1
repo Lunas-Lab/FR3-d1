@@ -72,9 +72,9 @@ function Install-Updater {
 
     Write-Host "Installing updater module..."
     New-Item -Path "$AppDataPath\FR3-d1_Updater\" `
-                -ItemType Directory | Out-Null
+        -ItemType Directory | Out-Null
     Copy-Item -Path "$PSScriptRoot\updater.ps1" `
-                -Destination "$AppDataPath\FR3-d1_Updater\"
+        -Destination "$AppDataPath\FR3-d1_Updater\"
 }
 
 
@@ -92,10 +92,13 @@ Install-Updater
 Write-Host "Installation complete!" -ForegroundColor Green
 
 do {
-$Open = Read-Host "Would you like to open FR3-d1? (y/n)"
+    $Open = Read-Host "Would you like to open FR3-d1? (y/n)"
 } while ($Open -notin 'y', 'n')
+
+$AppDataPath = [Environment]::GetFolderPath('LocalApplicationData')
+
 
 switch ($Open) {
     'y' { Start-Process -FilePath "powershell.exe" -ArgumentList "-File `"$AppDataPath\FR3-d1\FR3-d1.ps1`""; exit }
-    'n' {exit}
+    'n' { exit }
 }
